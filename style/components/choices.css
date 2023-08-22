@@ -1,0 +1,52 @@
+.choices {
+	width: 100%;
+}
+.choices__inner {
+	display: flex;
+	align-items: center;
+	background-color: var(--white);
+	padding: 6px 16px !important;
+	min-height: 32px;
+	border: none;
+}
+.choices__list--single {
+	padding: 0;
+	z-index: 22;
+	color: var(--grayDark);
+}
+.choices[data-type*=select-one]::after {
+	right: 16px;
+	width: 8px;
+	height: 6px;
+	background-image: url('../../img/arrow.svg');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	border: none;
+	transition: transform .3s ease-in-out;
+	z-index: 22;
+}
+.choices[data-type*=select-one].is-open::after {
+	margin-top: -2.5px ;
+	transform: scale(1, -1);
+}
+/* ---------- ДОРАБОТКА Choices---------- */
+/* 
+	padding для option (чтобы выглядели одинакова с первым option "Выбрать город")
+*/
+.choices__list--dropdown .choices__item, 
+.choices__list[aria-expanded] .choices__item {
+	padding: 6px 15px;
+}
+/* 
+	Цвет выбранного option 
+*/
+.choices__item--selectable {
+	color: var(--dark);
+}
+/* 
+	Убираем option "Выбрать город" из .choices__list--dropdown
+*/
+#choices--city-item-choice-1 {
+	display: none;
+}

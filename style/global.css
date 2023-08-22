@@ -3,9 +3,12 @@
 	--white: #fff;
 	--dark: #171717;
 	--gray: #f3f4f8;
+	--grayMedium: #EEEEF4;
+	--grayDark: #ccc;
 	--blue: #2A18FF;
 	--blueMedium: #4F58BE;
 	--blueLight: #A6ADFF;
+	--blueExtraLight: #EAECFF;
 }
 
 /* RESET */
@@ -48,6 +51,11 @@ fieldset {
 	margin: 0;
 	padding: 0;
 	border: none;
+}
+label, 
+select, 
+input[type="checkbox"] {
+	cursor: pointer;
 }
 
 /* GLOBAL */

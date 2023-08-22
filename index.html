@@ -5,10 +5,31 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+	<link rel="apple-touch-icon" sizes="57x57" href="img/favicon/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="img/favicon/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="img/favicon/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="img/favicon/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="img/favicon/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="img/favicon/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="img/favicon/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="img/favicon/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="img/favicon/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="img/favicon/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
+	<link rel="manifest" href="img/favicon/manifest.json">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="img/favicon/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
+
 	<meta name="description" content="Work Space — сервис, который помогает найти работу своей мечты! Создавайте резюме и откликайтесь на вакансии.">
 	<meta name="keywords" content="работа, должность, резюме, вакансии, поиск работы, работа в , найти работу, стажировки, без опыта">
 
 	<link href="index.css" rel="stylesheet">
+
+	<script src="js/choices.min.js" defer></script>
+	<script src="js/script.js" defer></script>
 
 	<title>Work Space</title>
 </head>
@@ -30,6 +51,8 @@
 
 		<div class="vacancies" id="vacancies">
 			<div class="container vacancies__container">
+				<button class="vacancies__filter-btn">Фильтр</button>
+
 				<section class="vacancies__filter filter">
 					<h2 class="filter__title">Фильтр</h2>
 					
@@ -124,8 +147,8 @@
 						</div>
 
 						<div class="filter__buttons">
-							<button class="filter__button" type="submit">Применить</button>
-							<button class="filter__reset" type="reset">Очистить</button>
+							<button class="btn btn--small filter__button" type="submit">Применить</button>
+							<button class="filter__reset" type="reset" disabled>Очистить</button>
 						</div>
 					</form>
 				</section>
@@ -136,12 +159,9 @@
 					<ul class="cards__list">
 						<li class="cards__item">
 							<article class="vacancy" tabindex="0">
-								<img class="vacancy__logo" src="img/yadro.svg" alt="Логотип компании Yadro">
-
+								<img class="vacancy__logo" width="44" height="44" src="img/yadro.svg" alt="Логотип компании Yadro">
 								<p class="vacancy__company">YADRO</p>
-
 								<h3 class="vacancy__title">Инженер</h3>
-
 								<ul class="vacancy__fields">
 									<li class="vacancy__field">от 150 000₽</li>
 									<li class="vacancy__field">полная занятость</li>
@@ -152,37 +172,83 @@
 						</li>
 
 						<li class="cards__item">
-							<article class="vacancy" tabindex="0">
-								<img class="vacancy__logo" src="img/creative.svg" alt="Логотип компании Creative People">
-
-								<p class="vacancy__company">Creative People</p>
-
-								<h3 class="vacancy__title">Графический дизайнер</h3>
-
-								<ul class="vacancy__fields">
-									<li class="vacancy__field">от 110 000₽</li>
-									<li class="vacancy__field">проектная работа</li>
-									<li class="vacancy__field">удаленный</li>
-									<li class="vacancy__field">опыт от 1 года до 3-х лет</li>
-								</ul>
-							</article>
+							<div id="">
+								<article class="vacancy" tabindex="0">
+									<img class="vacancy__logo" width="44" height="44" src="img/creative.svg" alt="Логотип компании Creative People">
+									<p class="vacancy__company">Creative People</p>
+									<h3 class="vacancy__title">Графический дизайнер</h3>
+									<ul class="vacancy__fields">
+										<li class="vacancy__field">от 110 000₽</li>
+										<li class="vacancy__field">проектная работа</li>
+										<li class="vacancy__field">удаленный</li>
+										<li class="vacancy__field">опыт от 1 года до 3-х лет</li>
+									</ul>
+								</article>
+							</div>
 						</li>
 
 						<li class="cards__item">
-							<article class="vacancy" tabindex="0">
-								<img class="vacancy__logo" src="img/yadro.svg" alt="Логотип компании Yadro">
+							<div id="">
+								<article class="vacancy" tabindex="0">
+									<img class="vacancy__logo" width="44" height="44" src="img/yadro.svg" alt="Логотип компании Yadro">
+									<p class="vacancy__company">YADRO</p>
+									<h3 class="vacancy__title">Инженер</h3>
+									<ul class="vacancy__fields">
+										<li class="vacancy__field">от 150 000₽</li>
+										<li class="vacancy__field">полная занятость</li>
+										<li class="vacancy__field">офис</li>
+										<li class="vacancy__field">опыт от 3-х лет</li>
+									</ul>
+								</article>
+							</div>
+						</li>
 
-								<p class="vacancy__company">YADRO</p>
+						<li class="cards__item">
+							<div id="">
+								<article class="vacancy" tabindex="0">
+									<img class="vacancy__logo" width="44" height="44" src="img/yadro.svg" alt="Логотип компании Yadro">
+									<p class="vacancy__company">YADRO</p>
+									<h3 class="vacancy__title">Инженер</h3>
+									<ul class="vacancy__fields">
+										<li class="vacancy__field">от 150 000₽</li>
+										<li class="vacancy__field">полная занятость</li>
+										<li class="vacancy__field">офис</li>
+										<li class="vacancy__field">опыт от 3-х лет</li>
+									</ul>
+								</article>
+							</div>
+						</li>
 
-								<h3 class="vacancy__title">Инженер</h3>
+						<li class="cards__item">
+							<div id="">
+								<article class="vacancy" tabindex="0">
+									<img class="vacancy__logo" width="44" height="44" src="img/creative.svg" alt="Логотип компании Creative People">
+									<p class="vacancy__company">Creative People</p>
+									<h3 class="vacancy__title">Графический дизайнер</h3>
+									<ul class="vacancy__fields">
+										<li class="vacancy__field">от 110 000₽</li>
+										<li class="vacancy__field">проектная работа</li>
+										<li class="vacancy__field">удаленный</li>
+										<li class="vacancy__field">опыт от 1 года до 3-х лет</li>
+									</ul>
+								</article>
+							</div>
+						</li>
 
-								<ul class="vacancy__fields">
-									<li class="vacancy__field">от 150 000₽</li>
-									<li class="vacancy__field">полная занятость</li>
-									<li class="vacancy__field">офис</li>
-									<li class="vacancy__field">опыт от 3-х лет</li>
-								</ul>
-							</article>
+						<li class="cards__item">
+							<div id="">
+								<article class="vacancy" tabindex="0">
+									<img class="vacancy__logo" width="44" height="44" src="img/yadro.svg" alt="Логотип компании Yadro">
+									<p class="vacancy__company">YADRO</p>
+									<h3 class="vacancy__title">Инженер</h3>
+									<ul class="vacancy__fields">
+										<li class="vacancy__field">от 150 000₽</li>
+										<li class="vacancy__field">полная занятость</li>
+										<li class="vacancy__field">офис</li>
+										<li class="vacancy__field">опыт от 3-х лет</li>
+									</ul>
+								</article>
+							</div>
 						</li>
 					</ul>
 				</section>
