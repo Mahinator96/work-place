@@ -1,0 +1,14 @@
+@import 'style/fonts.css';
+@import 'style/normalize.css';
+@import 'style/global.css';
+
+
+/* COMPONENTS */
+@import 'style/components/btn.css';
+@import 'style/components/vacancy.css';
+
+/* SECTION */
+@import 'style/section/header.css';
+@import 'style/section/hero.css';
+@import 'style/section/cards.css';
+@import 'style/section/footer.css';

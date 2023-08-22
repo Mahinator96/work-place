@@ -1,7 +1,11 @@
 /* VAR */
 :root {
-	--mainText: #171717;
-	--bgFrame: #f3f4f8;
+	--white: #fff;
+	--dark: #171717;
+	--gray: #f3f4f8;
+	--blue: #2A18FF;
+	--blueMedium: #4F58BE;
+	--blueLight: #A6ADFF;
 }
 
 /* RESET */
@@ -50,11 +54,11 @@ fieldset {
 body {
 	font-family: 'Inter', sans-serif;
 	font-size: 14px;
-	color: var(--mainText);
+	color: var(--dark);
 	line-height: 1.2;
 	min-width: 320px;
 	min-height: 100vh;
-	background-color: var(--bgFrame);
+	background-color: var(--gray);
 }
 .visually-hidden {
   position: absolute;
@@ -75,4 +79,7 @@ body {
 	max-width: calc(var(--width) + (var(--padding) * 2));
 	margin: 0 auto;
 	padding: 0 var(--padding);
+}
+.blue-text {
+	color: var(--blue);
 }

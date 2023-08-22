@@ -1,0 +1,20 @@
+.btn {
+	background-color: var(--blueLight);
+	transition: .3s ease-in-out;
+}
+.btn:hover {
+	color: var(--white);
+	background-color: var(--blue);
+}
+.btn:focus-visible {
+	outline: 2px solid var(--blueMedium);
+}
+.btn--medium {
+	font-size: 20px;
+	padding: 12px 32px;
+	border-radius: 8px;
+}
+.btn--small {
+	border-radius: 4px;
+	padding: 8px 24px;
+}
