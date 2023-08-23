@@ -6,7 +6,7 @@
 	top: 7px;
 	right: 0;
 }
-.filter__reset:disabled {
+.filter__reset {
 	color: var(--grayDark);
 }
 .filter__title {
