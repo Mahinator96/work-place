@@ -43,7 +43,7 @@
 */
 .choices.is-open {
 	border: 1px solid #b7b7b7;
-	border-bottom: none;
+	border-bottom: 1px solid transparent;
 }
 /* 
 	Фиксим положение выпадающего списка
@@ -51,7 +51,7 @@
 .choices__list--dropdown, .choices__list[aria-expanded] {
 	width: 280px;
 	left: -1px;
-	border-top: none;
+	border-top: 1px solid transparent !important;
 }
 /* 
 	padding для option (чтобы выглядели одинакова с первым option "Выбрать город")
@@ -69,9 +69,9 @@
 /* 
 	Убираем option "Выбрать город" из .choices__list--dropdown
 */
-#choices--city-item-choice-1 {
+/* #choices--city-item-choice-1 {
 	display: none;
-}
+} */
 .is-selected {
 	display: none;
 }
