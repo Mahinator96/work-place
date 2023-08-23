@@ -15,6 +15,7 @@
 html {
 	position: relative;
 	box-sizing: border-box;
+	scroll-behavior: smooth;
 }
 *,
 *::before,
@@ -67,6 +68,7 @@ body {
 	min-width: 320px;
 	min-height: 100vh;
 	background-color: var(--gray);
+	overflow-x: hidden;
 }
 .visually-hidden {
   position: absolute;

@@ -9,6 +9,7 @@
 @import 'style/components/vacancy.css';
 @import 'style/components/checkbox.css';
 @import 'style/components/choices.css';
+@import 'style/components/modal.css';
 
 /* SECTION */
 @import 'style/section/header.css';
@@ -17,3 +18,4 @@
 @import 'style/section/filter.css';
 @import 'style/section/cards.css';
 @import 'style/section/footer.css';
+@import 'style/section/detail.css';
