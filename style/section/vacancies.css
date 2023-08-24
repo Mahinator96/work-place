@@ -9,15 +9,16 @@
 .vacancies__filter-btn {
 	display: none;
 }
-.vacancies__filter-btn_active::after {
+/* .vacancies__filter-btn_active::after {
 	transform: scale(1, -1);
-}
+} */
 .vacancies__filter {
 	flex: 0 0 280px;
 	transition: height .4s ease-in-out;
 }
 .vacancies__filter.vacancies__filter_active {
 	height: auto;
+	/* height: 300px; */
 }
 .vacancies__cards {
 	flex-grow: 1;
@@ -52,7 +53,8 @@
 		transition: transform .3s ease-in-out;
 	}
 	.vacancies__filter-btn.vacancies__filter-btn_open::after {
-		transform: scale(1, -1) translateY(-3px);
+		/* transform: scale(1, -1) translateY(-3px); */
+		transform: rotate(180deg) translateY(-3px);
 	}
 	.vacancies__filter {
 		width: 100%;

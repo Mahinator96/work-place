@@ -256,7 +256,7 @@ const observer = new IntersectionObserver(
 /* Инициализация при запуске приложения */
 const init = () => {
 	const filterForm = document.querySelector('.filter__form');
-
+	const urlWithParam = new URL(`${API_URL}${VACANCY_URL}`);
 	/*  Работа с choices.js */
 	const citySelect = document.querySelector('#city');
 	const cityChoices = new Choices(citySelect, {
@@ -300,7 +300,31 @@ const init = () => {
 					'label',
 					true
 				);
+				console.log('reset: ', urlWithParams);
+				// if (urlWithParams.search === '?limit=12') {
+
+					/* Рендер карточек заново. Нужно условие для проверки на пустой фильтр  */
+					cardList.innerHTML = '';
+					console.log('при reset:', urlWithParams);
+	
+					// urlWithParams.search = '?limit=12'
+					getData(urlWithParams, renderVacancy, renderError).then(() => {
+						lastUrl = urlWithParams;
+					});
+				// }
 			})
+			
+			// if (urlWithParams.search != '?limit=12') {
+			// 	filterForm.addEventListener('reset', () => {
+			// 		/* Рендер карточек заново. Нужно условие для проверки на пустой фильтр  */
+			// 		cardList.innerHTML = '';
+			// 		console.log('при reset:', urlWithParams);
+	
+			// 		getData(urlWithParams, renderVacancy, renderError).then(() => {
+			// 			lastUrl = urlWithParams;
+			// 		});
+			// 	})
+			// }
 		}, 
 
 		(err) => console.log(err)
@@ -336,15 +360,16 @@ const init = () => {
 		event.preventDefault();
 
 		const formData = new FormData(filterForm);
-		const urlWithParam = new URL(`${API_URL}${VACANCY_URL}`);
+		// const urlWithParam = new URL(`${API_URL}${VACANCY_URL}`);
 
 		formData.forEach((value, key) => {
-			urlWithParam.searchParams.append(key, value);
+			urlWithParam.searchParams.append(key, value);	
 		});
 
 		getData(urlWithParam, renderVacancy, renderError).then(() => {
+			console.log('при submit:', urlWithParam);
 			lastUrl = urlWithParam;
-			observer.observe(cardList)
+			observer.observe(cardList);
 		});
 	});
 }
