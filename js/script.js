@@ -3,6 +3,11 @@ const API_URL = "https://workspace-methed.vercel.app/";
 const LOCATION_URL = "api/locations";
 const VACANCY_URL = 'api/vacancy';
 
+const pagination = {};
+const cardList = document.querySelector('.cards__list'); 
+
+let lastUrl = '';
+
 /* Ф-ия для получения данных */
 const getData = async (url, cbSuccess, cbError) => {
 	try {
@@ -53,20 +58,54 @@ const createCards = data => data.vacancies.map(vacancy => {
 });
 
 /* Добавление карточек в ul.cards__list */
-const renderVacancy = (data, cardList) => {
+const renderVacancy = (data) => {
+	const cardList = document.querySelector('.cards__list'); 
 	cardList.textContent = '';
 
 	const cards = createCards(data);
 
 	cardList.append(...cards);
-}
+
+	if (data.pagination) {
+		Object.assign(pagination, data.pagination);
+	}
+
+	observer.observe(cardList.lastElementChild);
+};
+
+/* Добавление дополнительных вакансий */
+const renderMoreVacancies = data => {
+	const cards = createCards(data);
+
+	cardList.append(...cards);
+
+	if (data.pagination) {
+		Object.assign(pagination, data.pagination);
+	}
+
+	observer.observe(cardList.lastElementChild);
+};
+
+/* Загрузка дополнительных вакансий */
+const loadMoreVacancies = () => {
+	if (pagination.totalPages > pagination.currentPage) {
+		const urlWithParams = new URL(lastUrl);
+	
+		urlWithParams.searchParams.set('page', pagination.currentPage + 1);
+		urlWithParams.searchParams.set('limit', window.innerWidth < 768 ? 6 : 12);
+
+		getData(urlWithParams, renderMoreVacancies, renderError).then(() => {
+			lastUrl = urlWithParams;
+		});
+	}
+};
 
 /* Открытие модалки */
 const openModal = id => {
 	getData(`${API_URL}${VACANCY_URL}/${id}`,
 	renderModal,
 	renderError,
-)}
+)};
 
 const createDetailVacancy = data => {
 	const {
@@ -141,11 +180,33 @@ const renderModal = data => {
 	modalMain.append(modalClose);
 
 	document.body.append(modal);
+
+	/* Закрытие модального окна */
+	modal.addEventListener('click', ({target}) => {
+		if (target === modal || target.closest('.modal__close')) {
+			modal.remove();
+		}
+	});
 }
+
+
+/* Смотритель */
+const observer = new IntersectionObserver(
+	entries => {
+		entries.forEach(entry => {
+			/* Если элемет видимый */
+			if (entry.isIntersecting) {
+				loadMoreVacancies();
+			}
+		})
+	}, {
+		rootMargin: '100px',
+	}
+);
 
 /* Инициализация при запуске приложения */
 const init = () => {
-	const cardList = document.querySelector('.cards__list'); 
+	const filterForm = document.querySelector('.filter__form');
 
 	/*  Работа с choices.js */
 	const citySelect = document.querySelector('#city');
@@ -173,16 +234,19 @@ const init = () => {
 
 		(err) => console.log(err)
 	);
-	
-	const url = new URL(`${API_URL}${VACANCY_URL}`)
-	
-	/* Получение вакансий */
-	getData(
-		url, 
-		data => renderVacancy(data, cardList), 
-		renderError
-	);
 
+
+	const urlWithParams = new URL(`${API_URL}${VACANCY_URL}`);
+
+	
+	urlWithParams.searchParams.set('limit', window.innerWidth < 768 ? 6 : 12);
+
+	/* Получение вакансий */
+	getData(urlWithParams, renderVacancy, renderError).then(() => {
+		lastUrl = urlWithParams;
+	});
+
+	/* Открытие модального окна по клику на вакансию */
 	cardList.addEventListener('click', ({target}) => {
 		const vacancyCard = target.closest('.vacancy');
 
@@ -191,6 +255,23 @@ const init = () => {
 
 			openModal(vacancyId);
 		}
+	});
+
+	/* Работа фильтра */
+	filterForm.addEventListener('submit', event => {
+		event.preventDefault();
+
+		const formData = new FormData(filterForm);
+		const urlWithParam = new URL(`${API_URL}${VACANCY_URL}`);
+
+		formData.forEach((value, key) => {
+			urlWithParam.searchParams.append(key, value);
+		});
+
+		getData(urlWithParam, renderVacancy, renderError).then(() => {
+			lastUrl = urlWithParam;
+			observer.observe(cardsList)
+		});
 	});
 }
 

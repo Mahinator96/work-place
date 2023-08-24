@@ -14,6 +14,7 @@
 	margin-bottom: 8px;
 }
 .vacancy__title {
+	font-size: 14px;
 	font-weight: 400;
 	max-width: fit-content;
 	padding: 3px 5px;
