@@ -69,6 +69,9 @@ body {
 	min-height: 100vh;
 	background-color: var(--gray);
 }
+body._lock {
+	overflow: hidden;
+}
 .main {
 	overflow-x: hidden;
 }

@@ -8,6 +8,31 @@ const cardList = document.querySelector('.cards__list');
 
 let lastUrl = '';
 
+/* Функция для работы с скроллом при открытии модального окна */
+const scrollService = {
+	scrollPosition: 0,
+	disabledScroll() {
+		this.scrollPosition = window.scrollY;
+		document.documentElement.style.scrollBehavior = 'auto';
+		document.body.style.cssText = 
+		`
+			overflow: hidden;
+			position: fixed;
+			top: -${this.scrollPosition}px;
+			left: 0;
+			height: 100vh;
+			width: 100vw;
+			padding-right: ${window.innerWidth - document.body.offsetWidth}px;
+		`;
+	},
+	enabledScroll() {
+		document.body.style.cssText = '';
+		
+		window.scroll({ top: this.scrollPosition});
+		document.documentElement.style.scrollBehavior = 'smooth';
+	},
+};
+
 /* Ф-ия для получения данных */
 const getData = async (url, cbSuccess, cbError) => {
 	try {
@@ -157,6 +182,8 @@ const createDetailVacancy = data => {
 
 /* Добавление модального окна в body */
 const renderModal = data => {
+	document.body.classList.add('_lock');
+
 	const modal = document.createElement('div');
 	modal.classList.add('modal'); 
 	
@@ -184,7 +211,18 @@ const renderModal = data => {
 	/* Закрытие модального окна */
 	modal.addEventListener('click', ({target}) => {
 		if (target === modal || target.closest('.modal__close')) {
+			document.body.classList.remove('_lock');
 			modal.remove();
+
+			// Показываем скролл на странице
+			setTimeout(() => {
+				scrollService.enabledScroll();
+				modalElem.style.visibility = 'hidden';
+	
+				if (close) {
+					close();
+				}
+			}, 100)
 		}
 	});
 }
@@ -287,6 +325,9 @@ const init = () => {
 			const vacancyId = vacancyCard.dataset.id;
 
 			openModal(vacancyId);
+			
+			/* Убираем скролл на странице */
+			scrollService.disabledScroll();
 		}
 	});
 
