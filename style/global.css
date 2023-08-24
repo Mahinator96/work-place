@@ -68,6 +68,8 @@ body {
 	min-width: 320px;
 	min-height: 100vh;
 	background-color: var(--gray);
+}
+.main {
 	overflow-x: hidden;
 }
 .visually-hidden {
@@ -92,4 +94,20 @@ body {
 }
 .blue-text {
 	color: var(--blue);
+}
+
+@media (max-width: 1140px) {
+	.container {
+		--width: 880px;
+	}
+}
+@media (max-width: 940px) {
+	.container {
+		--width: 680px;
+	}
+}
+@media (max-width: 640px) {
+	.container {
+		--padding: 15px;
+	}
 }

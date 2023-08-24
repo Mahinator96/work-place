@@ -3,14 +3,15 @@
 }
 .hero__container {
 	position: relative;
-	padding: 57px 0;
+	padding-top: 57px;
+	padding-bottom: 57px;
 }
 .hero__container::after {
 	content: '';
 	width: 421px;
-	height: 330px;
 	position: absolute;
 	top: 0;
+	bottom: 0;
 	right: -39px;
 	background-image: url('../../img/laptop.png');
 	background-repeat: no-repeat;
@@ -18,9 +19,69 @@
 	background-size: contain;
 }
 .hero__title {
+	position: relative;
 	font-size: 90px;
 	font-weight: 400;
 	max-width: 8.66em; /* 780/90 */
 	text-transform: uppercase;
 	letter-spacing: 1.8px;
+	z-index: 2;
+}
+
+@media (max-width: 1140px) {
+	.hero {
+		padding: 40px 0;
+	}
+	.hero__container {
+		padding-top: 53px;
+		padding-bottom: 53px;
+	}
+	.hero__container::after {
+		width: 320px;
+	}
+	.hero__title {
+		font-size: 64px;
+		letter-spacing: 1.28px;
+	}
+}
+
+@media (max-width: 940px) {
+	.hero {
+		padding: 30px 0;
+	}
+	.hero__container {
+		padding-top: 40px;
+		padding-bottom: 40px;
+	}
+	.hero__container::after {
+		width: 269px;
+	}
+	.hero__title {
+		font-size: 52px;
+		letter-spacing: 1.04px;
+	}
+}
+@media (max-width: 640px) {
+	.hero {
+		padding-top: 20px;
+		padding-bottom: 20px;
+	}
+	.hero__container {
+		padding-top: 0;
+		padding-bottom: 233px;
+	}
+	.hero__container::after {
+		height: 269px;
+		right: auto;
+		top: auto;
+		bottom: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		background-position: bottom;
+	}
+	.hero__title {
+		font-size: 32px;
+		text-align: center;
+		margin: 0 auto;
+	}
 }

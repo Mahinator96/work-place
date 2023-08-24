@@ -189,6 +189,17 @@ const renderModal = data => {
 	});
 }
 
+const openFilter = () => {
+	const vacancyFilter = document.querySelector('.vacancies__filter');
+	const filterBtnOpen = document.querySelector('.vacancies__filter-btn');
+
+	filterBtnOpen.addEventListener('click', () => {
+		filterBtnOpen.classList.toggle('vacancies__filter-btn_open');
+		vacancyFilter.classList.toggle('vacancies__filter_active');
+	});
+};
+
+openFilter()
 
 /* Смотритель */
 const observer = new IntersectionObserver(
@@ -213,7 +224,13 @@ const init = () => {
 	const cityChoices = new Choices(citySelect, {
 		// searchEnabled: false,
 		itemSelectText: '',
+		position: 'bottom',
 	});
+
+	placeholderItem = cityChoices._getTemplate( 'placeholder', 'Выбрать город' ); 
+	cityChoices.itemList.append(placeholderItem)
+
+	// Удаляем все option в HTML
 
 	/*  Получение городов */
 	getData(
@@ -230,6 +247,22 @@ const init = () => {
 				'label',
 				true
 			)
+			
+			// <--- РЕШЕНИЕ ПРОБЛЕМЫ С RESET --->
+			/* При нажатии на кнопку "очистить" */
+			filterForm.addEventListener('reset', (ev) => {
+				/* Добавляем placeholder */
+				placeholderItem = cityChoices._getTemplate( 'placeholder', 'Выбрать город' ); 
+				cityChoices.itemList.append(placeholderItem)
+
+				/* Рендерим заново выпадающий список */
+				cityChoices.setChoices(
+					locations,
+					'value',
+					'label',
+					true
+				);
+			})
 		}, 
 
 		(err) => console.log(err)
@@ -270,7 +303,7 @@ const init = () => {
 
 		getData(urlWithParam, renderVacancy, renderError).then(() => {
 			lastUrl = urlWithParam;
-			observer.observe(cardsList)
+			observer.observe(cardList)
 		});
 	});
 }

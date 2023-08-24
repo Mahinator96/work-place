@@ -27,3 +27,8 @@
 .modal__close:focus-visible {
 	outline-color: var(--grayDark); 
 }
+@media (max-width: 640px) {
+	.modal {
+		padding: 30px 15px;
+	}
+}

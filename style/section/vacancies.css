@@ -9,9 +9,67 @@
 .vacancies__filter-btn {
 	display: none;
 }
+.vacancies__filter-btn_active::after {
+	transform: scale(1, -1);
+}
 .vacancies__filter {
 	flex: 0 0 280px;
+	transition: height .4s ease-in-out;
+}
+.vacancies__filter.vacancies__filter_active {
+	height: auto;
 }
 .vacancies__cards {
 	flex-grow: 1;
+}
+
+@media (max-width: 1140px) {
+	.vacancies {
+		padding: 40px 0;
+	}
+}
+@media (max-width: 940px) {
+	.vacancies {
+		padding: 30px 0;
+	}
+	.vacancies__container {
+		flex-direction: column;
+		row-gap: 32px;
+	}
+	.vacancies__filter-btn {
+		display: flex;
+		align-items: center;
+	}
+	.vacancies__filter-btn::after {
+		content: '';
+		display: block;
+		width: 20px;
+		height: 20px;
+		background-image: url('../../img/arrow-filter.svg');
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: contain;
+		transition: transform .3s ease-in-out;
+	}
+	.vacancies__filter-btn.vacancies__filter-btn_open::after {
+		transform: scale(1, -1) translateY(-3px);
+	}
+	.vacancies__filter {
+		width: 100%;
+		flex-basis: auto;
+		height: 0;
+		overflow: hidden;
+	}
+	.vacancies__cards {
+		padding-top: 8px;
+		width: 100%;
+	}
+}
+@media (max-width: 640px) {
+	.vacancies__container {
+		gap: 24px;
+	}
+	.vacancies__cards {
+		padding-top: 16px;
+	}
 }
