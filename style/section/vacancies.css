@@ -8,17 +8,13 @@
 }
 .vacancies__filter-btn {
 	display: none;
-}
-/* .vacancies__filter-btn_active::after {
-	transform: scale(1, -1);
-} */
-.vacancies__filter {
-	flex: 0 0 280px;
 	transition: height .4s ease-in-out;
 }
+.vacancies__filter {
+	flex: 0 0 280px;
+}
 .vacancies__filter.vacancies__filter_active {
-	height: auto;
-	/* height: 300px; */
+	margin-bottom: 40px;
 }
 .vacancies__cards {
 	flex-grow: 1;
@@ -35,11 +31,12 @@
 	}
 	.vacancies__container {
 		flex-direction: column;
-		row-gap: 32px;
+		row-gap: 0;
 	}
 	.vacancies__filter-btn {
 		display: flex;
 		align-items: center;
+		margin-bottom: 24px;
 	}
 	.vacancies__filter-btn::after {
 		content: '';
@@ -50,17 +47,17 @@
 		background-repeat: no-repeat;
 		background-position: center;
 		background-size: contain;
-		transition: transform .3s ease-in-out;
+		transition: transform .4s ease-in-out;
 	}
 	.vacancies__filter-btn.vacancies__filter-btn_open::after {
-		/* transform: scale(1, -1) translateY(-3px); */
-		transform: rotate(180deg) translateY(-3px);
+		transform: scale(1, -1) translateY(-3px);
 	}
 	.vacancies__filter {
 		width: 100%;
 		flex-basis: auto;
 		height: 0;
 		overflow: hidden;
+		transition: height .4s ease-in-out
 	}
 	.vacancies__cards {
 		padding-top: 8px;
@@ -68,10 +65,10 @@
 	}
 }
 @media (max-width: 640px) {
-	.vacancies__container {
-		gap: 24px;
-	}
 	.vacancies__cards {
 		padding-top: 16px;
+	}
+	.vacancies__filter-btn.vacancies__filter-btn_open {
+		margin-bottom: 24px;
 	}
 }

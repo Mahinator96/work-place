@@ -4,6 +4,13 @@
 	border-radius: 16px;
 	background-color: var(--white);
 	cursor: pointer;
+	transition: background-color .3s ease-in-out;
+}
+.vacancy:hover {
+	background-color: var(--grayHover);
+}
+.vacancy:focus-visible {
+	outline: 2px solid var(--blueLight);
 }
 .vacancy__logo {
 	display: block;

@@ -132,6 +132,7 @@ const openModal = id => {
 	renderError,
 )};
 
+/* Добавление персональной информации в модальное окно */
 const createDetailVacancy = data => {
 	const {
 		id, 
@@ -227,17 +228,23 @@ const renderModal = data => {
 	});
 }
 
-const openFilter = () => {
-	const vacancyFilter = document.querySelector('.vacancies__filter');
-	const filterBtnOpen = document.querySelector('.vacancies__filter-btn');
+/* Открытие фильтра */
+const openFilter = (btn, dropDown, activeClassBtn, activeClassFilter) => {
+	dropDown.classList.add(activeClassFilter);
+	btn.classList.add(activeClassBtn);
 
-	filterBtnOpen.addEventListener('click', () => {
-		filterBtnOpen.classList.toggle('vacancies__filter-btn_open');
-		vacancyFilter.classList.toggle('vacancies__filter_active');
-	});
-};
+	// dropDown.scrollHeight - скрытая высота блока
+	dropDown.style.height = `${dropDown.scrollHeight}px`;
+}
 
-openFilter()
+/* Закрытие фильтра */
+const closeFilter = (btn, dropDown, activeClassBtn, activeClassFilter) => {
+	dropDown.classList.remove(activeClassFilter);
+	btn.classList.remove(activeClassBtn);
+
+	// dropDown.scrollHeight - скрытая высота блока
+	dropDown.style.height = 0;
+}
 
 /* Смотритель */
 const observer = new IntersectionObserver(
@@ -256,7 +263,11 @@ const observer = new IntersectionObserver(
 /* Инициализация при запуске приложения */
 const init = () => {
 	const filterForm = document.querySelector('.filter__form');
+	const vacanciesFilter = document.querySelector('.vacancies__filter');
+	const vacancisFilterBtn = document.querySelector('.vacancies__filter-btn');
+
 	const urlWithParam = new URL(`${API_URL}${VACANCY_URL}`);
+
 	/*  Работа с choices.js */
 	const citySelect = document.querySelector('#city');
 	const cityChoices = new Choices(citySelect, {
@@ -264,6 +275,22 @@ const init = () => {
 		itemSelectText: '',
 		position: 'bottom',
 	});
+
+	/* Работа с открытием и закрытием фильтра */
+	vacancisFilterBtn.addEventListener('click', () => {
+		if (vacancisFilterBtn.classList.contains('vacancies__filter-btn_open')) {
+			closeFilter(vacancisFilterBtn, vacanciesFilter, 'vacancies__filter-btn_open', 'vacancies__filter_active');
+		} else {
+			openFilter(vacancisFilterBtn, vacanciesFilter, 'vacancies__filter-btn_open', 'vacancies__filter_active')
+		}
+	});
+
+	/* При сжатии окна - получаем новую высоту фильтра и задаём её */
+	window.addEventListener('resize', () => {
+		/* Закрыть фильтр (и он примет свою скрытую высоту) */
+		closeFilter(vacancisFilterBtn, vacanciesFilter, 'vacancies__filter-btn_open', 'vacancies__filter_active');
+	});
+
 
 	placeholderItem = cityChoices._getTemplate( 'placeholder', 'Выбрать город' ); 
 	cityChoices.itemList.append(placeholderItem)
@@ -355,6 +382,21 @@ const init = () => {
 		}
 	});
 
+	/* Открытие модального окна при нажатии на Enter */
+	cardList.addEventListener('keydown', ({code, target}) => {
+		const vacancyCard = target.closest('.vacancy');
+
+		if ((code == 'Enter'  || code == 'NumpadEnter') && target == vacancyCard) {
+			const vacancyId = vacancyCard.dataset.id;
+
+			openModal(vacancyId);
+			target.blur();
+			
+			/* Убираем скролл на странице */
+			scrollService.disabledScroll();
+		}
+	})
+
 	/* Работа фильтра */
 	filterForm.addEventListener('submit', event => {
 		event.preventDefault();
@@ -370,7 +412,11 @@ const init = () => {
 			console.log('при submit:', urlWithParam);
 			lastUrl = urlWithParam;
 			observer.observe(cardList);
-		});
+		}).then (() => {
+			closeFilter(vacancisFilterBtn, vacanciesFilter, 'vacancies__filter-btn_open', 'vacancies__filter_active');
+		})
+
+		
 	});
 }
 

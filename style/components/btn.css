@@ -1,13 +1,19 @@
 .btn {
 	background-color: var(--blueLight);
 	transition: .3s ease-in-out;
+	border: 2px solid transparent;
 }
 .btn:hover {
 	color: var(--white);
 	background-color: var(--blue);
 }
 .btn:focus-visible {
-	outline: 2px solid var(--blueMedium);
+	/* outline: 2px solid var(--blueMedium); */
+	border: 2px solid var(--blueMedium);
+	outline: none;
+}
+.btn:disabled {
+	background-color: var(--grayMedium);
 }
 .btn--medium {
 	font-size: 20px;
